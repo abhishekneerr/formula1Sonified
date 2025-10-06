@@ -1,0 +1,28 @@
+# Ignore Python virtual environment folders
+venv/
+env/
+ENV/
+.virtualenv/
+
+# Ignore Python bytecode
+__pycache__/
+*.py[cod]
+
+# Ignore node_modules folder
+node_modules/
+
+# Ignore all log files
+*.log
+
+# Ignore OS-specific files
+.DS_Store
+
+# Ignore build artifacts
+dist/
+build/
+
+# Manual additions
+
+test_files/
+
+data/
