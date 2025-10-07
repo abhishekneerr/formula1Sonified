@@ -112,8 +112,35 @@ if top_df.empty:
     st.warning("No races found for the selected filters.")
 else:
     st.subheader(f"Top {len(top_df)} races for {driver}")
+
+    # --- make a display copy ---
     display_df = top_df.copy()
-    if 'gap_to_winner_s' in display_df.columns:
-        display_df['gap_to_winner'] = display_df['gap_to_winner_s'].map(lambda s: f"{s:.3f} s")
-        display_df = display_df.drop(columns=['gap_to_winner_s'])
-    st.dataframe(display_df.reset_index(drop=True), use_container_width=True)
+
+    # rename columns for readability
+    display_df = display_df.rename(columns={
+        'driver_name': 'Driver',
+        'positionOrder': 'Finish Position',
+        'grid': 'Starting Grid Position',
+        'positions_gained': 'Positions Gained',
+        'gap_to_winner_s': 'Gap to Winner (s)',
+        'gap_to_next_s': 'Gap to Next (s)',
+        'fastestLapTime_s': 'Fastest Lap Time (s)',
+        'fastestLapSpeed': 'Fastest Lap Speed (km/h)',
+        'wet_bonus': 'Wet Bonus',
+        'score': 'Performance Score'
+    })
+
+    # round numeric columns for cleaner display
+    display_df = display_df.round({
+        'Gap to Winner (s)': 3,
+        'Gap to Next (s)': 3,
+        'Fastest Lap Time (s)': 3,
+        'Fastest Lap Speed (km/h)': 1,
+        'Performance Score': 2
+    })
+
+    # reset index to start at 1 for readability
+    display_df.index = display_df.index + 1
+
+    # --- show table ---
+    st.dataframe(display_df, use_container_width=True)
