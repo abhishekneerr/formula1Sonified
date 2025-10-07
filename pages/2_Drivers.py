@@ -118,6 +118,9 @@ else:
 
     # rename columns for readability
     display_df = display_df.rename(columns={
+        'year': 'Year',
+        'round': 'Race Number',
+        'name': 'Grand Prix',
         'driver_name': 'Driver',
         'positionOrder': 'Finish Position',
         'grid': 'Starting Grid Position',
