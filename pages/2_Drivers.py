@@ -147,3 +147,7 @@ else:
 
     # --- show table ---
     st.dataframe(display_df, use_container_width=True)
+
+    ## new stuff for page 3 (the analysis thingy)
+    st.session_state["selected_driver"] = driver
+    st.session_state["top_candidates"] = top_df[["year", "name"]].copy()
